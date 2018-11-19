@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/addTeam}" th:object="${teamAttribute}" method="post">
+    <table>
+        <tr>
+            <td>Team Name</td>
+            <td><input type="text" th:field="*{nameTeam}"/> </td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="addTeam"/> </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+

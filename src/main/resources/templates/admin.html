@@ -1,0 +1,604 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$Title$</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
+
+
+</head>
+<body>
+
+<div id = "container">
+    <div class="container-fluid">
+        <div class="row" style="background: #2a2a2a; height: 45px">
+            <div class="col-md-11" style="margin-top: 10px">
+                <h4 class="text-muted"> MyScore Project </h4>
+            </div>
+            <div class="col-md-1" style="margin-top: 10px">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Выйти" class="btn btn-link btn-sm ">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-hockey" role="tab" aria-controls="home">Хоккей</a>
+                    <a class="list-group-item list-group-item-action" id="list-fifa-list" data-toggle="list" href="#list-fifa" role="tab" aria-controls="profile">Футбол</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Юзеры</a>
+                    <a class="list-group-item list-group-item-action" id="list-team-list" data-toggle="list" href="#list-team" role="tab" aria-controls="profile">Команды</a>
+                </div>
+            </div>
+            <div class="col-9" >
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-hockey" role="tabpanel" aria-labelledby="list-home-list" >
+                        <h2 class="h2" style = "margin-top: 30px">Admin panel</h2>
+                        <div class="card card-default" style= "margin-top: 50px">
+                            <div class="card-header">
+                                <!--<ul class="nav nav-tabs card-header-tabs pull-xs-left">-->
+                                    <!--<li class="nav-item">-->
+                                        <!--<a class="nav-link" href="#KHL">КХЛ</a>-->
+                                    <!--</li>-->
+                                    <!--<li class="nav-item">-->
+                                        <!--<a class="nav-link " href="#">НХЛ</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">KXL</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">NHL</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <table class="table table-striped" id="matchTable">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th scope="col">id</th>
+                                                        <th scope="col">Команда1</th>
+                                                        <th scope="col">Счет</th>
+                                                        <th scope="col">Команда2</th>
+                                                        <th scope="col">Начало матча</th>
+                                                        <th scope="col">Удалить матч</th>
+                                                        <th scope="col">Изменить счет/дату</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="matchBody">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div></div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">NHL</div>
+                                </div>
+                                <!--<div class="container-fluid">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-9">-->
+                                            <!--<table class="table table-striped">-->
+                                                <!--<thead>-->
+                                                <!--<tr>-->
+                                                    <!--<th scope="col">Команда1</th>-->
+                                                    <!--<th scope="col">Счет</th>-->
+                                                    <!--<th scope="col">Команда2</th>-->
+                                                    <!--<th scope="col">Начало матча</th>-->
+                                                <!--</tr>-->
+                                                <!--</thead>-->
+                                                <!--<tbody>-->
+                                                <!--</tbody>-->
+                                            <!--</table>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="list-fifa" role="tabpanel" aria-labelledby="list-fifa-list">
+                        ...
+                    </div>
+
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list" >
+                        <div class="card card-default" >
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#">Users table</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="modal" data-target="#myModal">
+                                            New User
+                                        </a>
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel">New User</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            x
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form role="form" th:action="@{/addUser}" th:object="${userAttribute}" method="post">
+                                                            <div class="form-group">
+                                                                <label for="name">имя:</label>
+                                                                <input id="name" class="form-control" name="name" required type="text" placeholder="Ivan" th:field="*{name}">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="age">возраст:</label>
+                                                                <input id="age" class="form-control" name="age" required type="text" placeholder="19" th:field="*{age}">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="login">логин:</label>
+                                                                <input id="login" class="form-control" name="login" required type="text" placeholder="Invan99" th:field="*{login}">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="password">пароль:</label>
+                                                                <input id="password" class="form-control" name="password" required type="password" placeholder="****" th:field="*{password}">
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="enabled" th:field="*{enabled}" value="" id="defaultCheck1">
+                                                                <label class="form-check-label" for="defaultCheck1" >
+                                                                    true
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="enabled" th:field="*{enabled}" value="" id="defaultCheck">
+                                                                <label class="form-check-label" for="defaultCheck" >
+                                                                    false
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <form role = "form" th:object="${roleAttribute}" >
+                                                                    <div class="form-group">
+                                                                        <label for="exampleFormControlSelect1">Role:</label>
+                                                                        <select class="form-control" id="exampleFormControlSelect1" name="role" th:field="*{nameRole}" >
+                                                                            <option th:value="'USER'">USER</option>
+                                                                            <option th:value="'ADMIN'">ADMIN</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="form-group">
+                                                                            <input type="submit" value="Save" class="btn btn-success"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="card-body">
+                                <!--<div class="container-fluid">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-9">-->
+
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <h3>All Users</h3>
+                                <table class="table table-striped">
+                                    <thead class="thead-default">
+                                    <tr>
+                                        <th scope="col" >Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Login</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">delete</th>
+                                        <th scope="col">Edit</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id = "userBody">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="list-team" role="tabpanel" aria-labelledby="list-team-list">
+                            <div class="card card-default" style= "margin-top: 50px">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#">Team table</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="modal" data-target="#teamModal">
+                                                New team
+                                            </a>
+
+
+
+                                            <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="teamModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="teamModalLabel">New Team</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                x
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form role="form" th:action="@{/addTeam}" th:object="${teamAttribute}" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="nameTeam">Назавание команды:</label>
+                                                                    <input id="nameTeam" class="form-control" name="nameTeam" required type="text" placeholder="СКА" th:field="*{nameTeam}">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <form role = "form" th:object="${sportAttribute}" >
+                                                                        <div class="form-group">
+                                                                            <label for="sportExampleFormControlSelect1">Sport:</label>
+                                                                            <select class="form-control" id="sportExampleFormControlSelect1" name="role" th:field="*{nameSport}" >
+                                                                                <option th:value="'Хоккей'">Хоккей</option>
+                                                                                <option th:value="'Футбол'">Футбол</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    <form role = "form" th:object = "${leagueAttribute}">
+                                                                        <div class="form-group">
+                                                                            <label for="leagueExampleFormControlSelect1">Лига:</label>
+                                                                            <select class="form-control" id="leagueExampleFormControlSelect1" name="role" th:field="*{nameLeague}" >
+                                                                                <option th:value="'КХЛ'">КХЛ</option>
+                                                                                <option th:value="'НХЛ'">НХЛ</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </form>
+                                                                        <div class="modal-footer">
+                                                                            <div class="form-group">
+                                                                                <input type="submit" value="Save" class="btn btn-success"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <li>
+                                        <a class="nav-link" data-toggle="modal" data-target="#matchModal">
+                                            New match
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <table id = "teamTable" class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Id</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Sport</th>
+                                                        <th scope="col">League</th>
+                                                        <th scope="col">delete</th>
+                                                        <th scope="col">edit</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id = "teamBody">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editModalLabel">Edit User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        x
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-vales">
+                        <label for="idChange">id:</label>
+                        <input id="idChange" class="form-control" type="text" name="idChange" disabled>
+                    </div>
+
+                    <div class="form-group form-vales">
+                        <label for="nameChange">имя:</label>
+                        <input id="nameChange" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group form-vales">
+                        <label for="ageChange">возраст:</label>
+                        <input id ="ageChange" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group form-vales">
+                        <label for="loginChange">логин:</label>
+                        <input id = "loginChange" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group form-vales">
+                        <label for="passwordChange">пароль:</label>
+                        <input id = "passwordChange" class="form-control" type="password" >
+                    </div>
+                    <div class="modal-footer">
+                        <button id='save' class='btn btn-danger'> Save </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="TeamEditModal" tabindex="-1" role="dialog" aria-labelledby="TeamEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TeamEditModalLabel">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group form-vales">
+                    <label for="idTeamChange">id:</label>
+                    <input id="idTeamChange" class="form-control" type="text" name="idTeamChange" disabled>
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="nameTeamChange">Команда:</label>
+                    <input id="nameTeamChange" class="form-control" type="text">
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="sportChange">Вид спорта:</label>
+                    <input id ="sportChange" class="form-control" type="text" disabled>
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="leagueChange">Лига:</label>
+                    <input id ="leagueChange" class="form-control" type="text">
+                </div>
+
+                <div class="modal-footer">
+                    <button id='saveTeam' class='btn btn-danger'> Save </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="MatchEditModal" tabindex="-1" role="dialog" aria-labelledby="MatcheditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="MatcheditModalLabel">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group form-vales">
+                    <label for="idMatchChange">id:</label>
+                    <input id="idMatchChange" class="form-control" type="text" name="idMatchChange" disabled>
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="nameMatchChange1">Команда1:</label>
+                    <input id="nameMatchChange1" class="form-control" type="text" disabled>
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="nameMatchChange2">Команда2:</label>
+                    <input id="nameMatchChange2" class="form-control" type="text" disabled>
+                </div>
+
+                <div class="form-group form-vales">
+                    <label for="dateMatchChange">Date:</label>
+                    <input id="dateMatchChange" class="form-control" type="text">
+                </div>
+
+                <div class="modal-footer">
+                    <button id='saveMatch' class='btn btn-danger'> Save </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="matchModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="matchModalLabel">New Match</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" th:action="@{/addMatch}" th:object="${matchAttribute}" method="post">
+
+
+                    <div class="form-group">
+                        <label for="score1">Счет команды1:</label>
+                        <input id="score1" class="form-control" name="score1" required type="text" placeholder="2" th:field="*{scoreTeam1}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score2">Счет команды2:</label>
+                        <input id="score2" class="form-control" name="score2" required type="text" placeholder="1" th:field="*{scoreTeam2}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Дата:</label>
+                        <!--<input id="dateMatch" class="form-control" name="dateMatch" required type="text" placeholder="18:00" th:field="*{matchDate}">-->
+                        <select name="role" th:field="*{matchDate}" >
+                            <option th:value="'01'">01</option>
+                            <option th:value="'02'">02</option>
+                            <option th:value="'03'">03</option>
+                            <option th:value="'04'">04</option>
+                            <option th:value="'05'">05</option>
+                            <option th:value="'06'">06</option>
+                            <option th:value="'07'">07</option>
+                            <option th:value="'08'">08</option>
+                            <option th:value="'09'">09</option>
+                            <option th:value="'10'">10</option>
+                            <option th:value="'11'">11</option>
+                            <option th:value="'12'">12</option>
+                            <option th:value="'13'">13</option>
+                            <option th:value="'14'">14</option>
+                            <option th:value="'15'">15</option>
+                            <option th:value="'16'">16</option>
+                            <option th:value="'17'">17</option>
+                            <option th:value="'18'">18</option>
+                            <option th:value="'19'">19</option>
+                            <option th:value="'20'">20</option>
+                            <option th:value="'21'">21</option>
+                            <option th:value="'22'">22</option>
+                            <option th:value="'23'">23</option>
+                            <option th:value="'24'">24</option>
+                            <option th:value="'25'">25</option>
+                            <option th:value="'26'">26</option>
+                            <option th:value="'27'">27</option>
+                            <option th:value="'28'">28</option>
+                            <option th:value="'29'">29</option>
+                            <option th:value="'30'">30</option>
+                            <option th:value="'31'">31</option>
+                        </select>
+
+                        <select  th:field="*{matchMonth}">
+                            <option th:value="'01'">01</option>
+                            <option th:value="'02'">02</option>
+                            <option th:value="'03'">03</option>
+                            <option th:value="'04'">04</option>
+                            <option th:value="'05'">05</option>
+                            <option th:value="'06'">06</option>
+                            <option th:value="'07'">07</option>
+                            <option th:value="'08'">08</option>
+                            <option th:value="'09'">09</option>
+                            <option th:value="'10'">10</option>
+                            <option th:value="'11'">11</option>
+                            <option th:value="'12'">12</option>
+                        </select>
+
+                        <label>Время:</label>
+
+                        <select th:field="*{matchTimeHours}">
+                            <option th:value="'00'">00</option>
+                            <option th:value="'01'">01</option>
+                            <option th:value="'02'">02</option>
+                            <option th:value="'03'">03</option>
+                            <option th:value="'04'">04</option>
+                            <option th:value="'05'">05</option>
+                            <option th:value="'06'">06</option>
+                            <option th:value="'07'">07</option>
+                            <option th:value="'08'">08</option>
+                            <option th:value="'09'">09</option>
+                            <option th:value="'10'">10</option>
+                            <option th:value="'11'">11</option>
+                            <option th:value="'12'">12</option>
+                            <option th:value="'13'">13</option>
+                            <option th:value="'14'">14</option>
+                            <option th:value="'15'">15</option>
+                            <option th:value="'16'">16</option>
+                            <option th:value="'17'">17</option>
+                            <option th:value="'18'">18</option>
+                            <option th:value="'19'">19</option>
+                            <option th:value="'20'">20</option>
+                            <option th:value="'21'">21</option>
+                            <option th:value="'22'">22</option>
+                            <option th:value="'23'">23</option>
+                        </select>
+
+                        <select  th:field="*{matchTimeMinutes}">
+                            <option th:value="'00'">00</option>
+                            <option th:value="'10'">10</option>
+                            <option th:value="'20'">20</option>
+                            <option th:value="'30'">30</option>
+                            <option th:value="'40'">40</option>
+                            <option th:value="'50'">50</option>
+                            <option th:value="'60'">60</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                    <form role="form"  th:object="${forMatchAttribute}" >
+                        <div class="form-group">
+                            <label>Команда1</label>
+                            <select class="form-control" th:field="*{team_id}">
+                                <option th:each="team : ${list}"
+                                        th:value="${team.id}"
+                                        th:utext="${team.nameTeam}"/>
+                            </select>
+                            <label>Команда2</label>
+                            <select class="form-control" th:field="*{team_id2}">
+                                <option th:each="team : ${list}"
+                                        th:value="${team.id}"
+                                        th:utext="${team.nameTeam}"/>
+                            </select>
+                        </div>
+                    </form>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-success"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/js/client.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
